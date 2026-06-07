@@ -1,0 +1,42 @@
+name: Automated Preprocessing
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'heart_raw/**'
+      - 'preprocessing/automate_Bima-Setia.py'
+  workflow_dispatch:   # Bisa trigger manual dari tab Actions
+
+jobs:
+  preprocess:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.7'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas==2.2.2 numpy==1.26.4 scikit-learn==1.5.0
+
+      - name: Run preprocessing script
+        run: |
+          python preprocessing/automate_Bima-Setia.py
+
+      - name: Commit hasil preprocessing ke repository
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add preprocessing/heart_preprocessing/
+          git diff --staged --quiet || git commit -m "ci: auto-update preprocessed dataset [skip ci]"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
