@@ -10,7 +10,7 @@
 
 Proyek ini membangun sistem ML yang dapat memprediksi risiko penyakit jantung berdasarkan data klinis pasien. Lebih dari sekadar notebook eksplorasi, pipeline ini dirancang untuk dapat dijalankan ulang secara otomatis — mencakup preprocessing terstruktur, eksperimen tracking dengan MLflow, hingga retraining terjadwal via GitHub Actions.
 
-**Dataset:** [Heart Disease Dataset — Kaggle (johnsmith88)](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset)
+**Dataset:** [Heart Disease Dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset)
 
 ---
 
@@ -127,4 +127,3 @@ mlflow ui
 ```
 
 Buka `http://localhost:5000` untuk melihat hasil eksperimen.
----
